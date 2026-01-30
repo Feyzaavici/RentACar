@@ -8,8 +8,8 @@ import lombok.Data;
 
 @Table(name="brands")
 @Entity
-@Data
-@AllArgsConstructor
+//@Data
+//@AllArgsConstructor
 public class Brand {
 
     @Id
@@ -19,5 +19,38 @@ public class Brand {
 
     @Column(name="name")
     private String name;
+
+
+
+    public Brand(){
+
+    }
+
+    public Brand(int id, String  Name){
+        this.id=id;
+        this.name=name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
+
+
+
 
 }
