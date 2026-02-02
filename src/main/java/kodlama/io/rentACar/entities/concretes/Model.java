@@ -35,7 +35,7 @@ public class Model {
 
     }
 
-    public Model(int id, String  Name){
+    public Model(int id, String  name){
         this.id=id;
         this.name=name;
     }
