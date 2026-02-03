@@ -1,6 +1,7 @@
 package kodlama.io.rentACar.webApi.controllers;
 
 
+import jakarta.validation.Valid;
 import kodlama.io.rentACar.business.abstructs.ModelService;
 import kodlama.io.rentACar.business.requests.CreateModelRequest;
 import kodlama.io.rentACar.business.responses.GetAllModelsResponse;
@@ -28,7 +29,7 @@ public class ModelsControllers {
 
     @PostMapping()
     @ResponseStatus(code= HttpStatus.CREATED)
-    public void add( @RequestBody CreateModelRequest createModelRequest){
+    public void add( @Valid @RequestBody CreateModelRequest createModelRequest){
         this.modelService.add(createModelRequest);
     }
 
