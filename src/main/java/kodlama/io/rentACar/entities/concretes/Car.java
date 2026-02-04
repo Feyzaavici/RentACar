@@ -1,6 +1,7 @@
 package kodlama.io.rentACar.entities.concretes;
 
 import jakarta.persistence.*;
+import kodlama.io.rentACar.entities.enums.CarState;
 
 @Entity
 @Table(name="cars")
@@ -21,7 +22,8 @@ public class Car {
     private int modelYear;
 
     @Column(name="state")
-    private int state; //1-Available 2-Rented 3-Maintenance
+    @Enumerated(EnumType.STRING)
+    private CarState state; //Available, Rented, Maintenance
 
     @ManyToOne
     @JoinColumn(name="model_id")
@@ -31,7 +33,7 @@ public class Car {
 
     }
 
-    public Car(int id, String plate, double dailyPrice, int modelYear, int state){
+    public Car(int id, String plate, double dailyPrice, int modelYear, CarState state){
         this.id=id;
         this.plate=plate;
         this.dailyPrice=dailyPrice;
@@ -73,11 +75,11 @@ public class Car {
         this.modelYear=modelYear;
     }
 
-    public int getState(){
+    public CarState getState(){
         return state;
     }
 
-    public void setState(int state){
+    public void setState(CarState state){
         this.state=state;
     }
 

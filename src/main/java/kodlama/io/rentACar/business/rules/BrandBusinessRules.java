@@ -2,7 +2,7 @@ package kodlama.io.rentACar.business.rules;
 
 import kodlama.io.rentACar.dataAccess.abstructs.BrandRepository;
 import kodlama.io.rentACar.core.exceptions.BusinessException;
-import lombok.AllArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 @Service
