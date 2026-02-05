@@ -11,15 +11,15 @@ public class CreateModelRequest {
 
     @NotBlank
     @NotNull
-    private int BranId;
+    private int brandId;
 
     public CreateModelRequest(){
 
     }
 
-    public CreateModelRequest(String name, int BranId){
+    public CreateModelRequest(String name, int brandId){
         this.name=name;
-        this.BranId=BranId;
+        this.brandId=brandId;
     }
 
     public void setName(String name) {
@@ -30,11 +30,11 @@ public class CreateModelRequest {
         return name;
     }
 
-    public int getBranId() {
-        return BranId;
+    public int getBrandId() {
+        return brandId;
     }
 
-    public void setBranId(int branId) {
-        BranId = branId;
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
     }
 }

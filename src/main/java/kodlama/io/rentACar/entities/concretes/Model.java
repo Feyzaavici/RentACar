@@ -35,9 +35,10 @@ public class Model {
 
     }
 
-    public Model(int id, String  name){
+    public Model(int id, String  name, Brand brand){
         this.id=id;
         this.name=name;
+        this.brand=brand;
     }
 
     public int getId() {
@@ -55,6 +56,7 @@ public class Model {
     public void setName(String name) {
         this.name = name;
     }
+
 
 
     public List<Car> getCars() {

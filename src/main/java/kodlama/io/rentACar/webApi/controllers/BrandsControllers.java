@@ -30,7 +30,7 @@ public class BrandsControllers {
     public List<GetAllBrandsResponse> getAll(){
 
         return brandService.getAll();
-    };
+    }
 
     @GetMapping("/{id}")
     public GetByIdResponse getByIdResponse( @PathVariable int id){

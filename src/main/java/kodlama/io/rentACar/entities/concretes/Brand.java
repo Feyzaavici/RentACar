@@ -28,7 +28,7 @@ public class Brand {
 
     }
 
-    public Brand(int id, String  Name){
+    public Brand(int id, String  name){
         this.id=id;
         this.name=name;
     }
