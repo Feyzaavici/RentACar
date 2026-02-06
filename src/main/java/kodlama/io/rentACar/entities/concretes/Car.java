@@ -1,7 +1,10 @@
 package kodlama.io.rentACar.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import kodlama.io.rentACar.entities.enums.CarState;
+
+import java.util.List;
 
 @Entity
 @Table(name="cars")
@@ -25,20 +28,28 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private CarState state; //Available, Rented, Maintenance
 
+    @Column(name="current_kilometer")
+    private Long currentKilometer;
+
     @ManyToOne
     @JoinColumn(name="model_id")
     private Model model;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "car")
+    private List<Rental> rentals;
 
     public Car(){
 
     }
 
-    public Car(int id, String plate, double dailyPrice, int modelYear, CarState state){
+    public Car(int id, String plate, double dailyPrice, int modelYear, CarState state, Long currentKilometer){
         this.id=id;
         this.plate=plate;
         this.dailyPrice=dailyPrice;
         this.modelYear=modelYear;
         this.state=state;
+        this.currentKilometer=currentKilometer;
 
     }
 
@@ -89,5 +100,17 @@ public class Car {
 
     public void setModel( Model model){
         this.model=model;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public Long getCurrentKilometer() {
+        return currentKilometer;
+    }
+
+    public void setCurrentKilometer(Long currentKilometer) {
+        this.currentKilometer = currentKilometer;
     }
 }

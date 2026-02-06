@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotNull;
 
 public class CreateModelRequest {
 
-    @NotNull
+
     @NotBlank
     private String name;
 
-    @NotBlank
+
     @NotNull
     private int brandId;
 

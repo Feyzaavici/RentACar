@@ -10,6 +10,7 @@ import kodlama.io.rentACar.business.responses.GetByIdCarResponse;
 
 import kodlama.io.rentACar.business.rules.CarBusinessRules;
 
+import kodlama.io.rentACar.core.exceptions.BusinessException;
 import kodlama.io.rentACar.core.utilies.mappers.ModelMapperService;
 import kodlama.io.rentACar.dataAccess.abstructs.CarRepository;
 import kodlama.io.rentACar.entities.concretes.Car;
@@ -80,5 +81,11 @@ public class CarManager implements CarService {
         this.carBusinessRules.checkIfCarCanBeDelete(id);
         this.carRepository.deleteById(id);
 
+    }
+
+    @Override
+    public Car getCarEntityById(int id) {
+        Car car=carRepository.findById(id).orElseThrow(()-> new BusinessException("Car not found."));
+        return car;
     }
 }
