@@ -4,6 +4,7 @@ import kodlama.io.rentACar.business.abstructs.BrandService;
 import kodlama.io.rentACar.business.requests.CreateBrandRequest;
 import kodlama.io.rentACar.business.requests.UpdateBrandRequest;
 import kodlama.io.rentACar.business.responses.GetAllBrandsResponse;
+import kodlama.io.rentACar.business.responses.GetAllCarsResponse;
 import kodlama.io.rentACar.business.responses.GetByIdResponse;
 import kodlama.io.rentACar.business.rules.BrandBusinessRules;
 import kodlama.io.rentACar.core.utilies.mappers.ModelMapperService;
@@ -14,7 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import kodlama.io.rentACar.entities.concretes.Car;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -32,6 +36,7 @@ public class BrandManager implements BrandService {
             this.brandBusinessRules=brandBusinessRules;
    }
 
+   /*
     @Override
     public List<GetAllBrandsResponse> getAll() {
 
@@ -40,6 +45,15 @@ public class BrandManager implements BrandService {
                 .map(brand -> this.modelMapperService.forResponse().map(brand, GetAllBrandsResponse.class))
                 .collect(Collectors.toList());
         return brandsResponse;
+    }*/
+
+    @Override
+    public Page<GetAllBrandsResponse> getAll(Pageable pageable) {
+
+        Page<Brand> brands = brandRepository.findAll(pageable);
+
+        return brands.map(brand -> modelMapperService.forResponse().map(brand, GetAllBrandsResponse.class)
+        );
     }
 
     @Override

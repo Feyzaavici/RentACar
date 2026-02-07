@@ -12,9 +12,12 @@ public class CreateRentalRequest {
     @NotNull
     private LocalDate rentDate;
 
-    public CreateRentalRequest(int carId, LocalDate rentDate ){
+    private int customerId;
+
+    public CreateRentalRequest(int carId, LocalDate rentDate, int customerId ){
         this.carId=carId;
         this.rentDate=rentDate;
+        this.customerId=customerId;
 
     }
 
@@ -38,5 +41,13 @@ public class CreateRentalRequest {
 
     public void setRentDate(LocalDate rentDate) {
         this.rentDate=rentDate;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public int getCustomerId() {
+        return customerId;
     }
 }

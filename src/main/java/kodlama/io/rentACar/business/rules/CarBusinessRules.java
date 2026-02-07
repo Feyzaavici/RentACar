@@ -34,13 +34,14 @@ public class CarBusinessRules {
     }
 
 
-     public void checkIfCarIsAvailableForRent(int id){
+    /* public void checkIfCarIsAvailableForRent(int id){
        Car car= this.carRepository.findById(id)
                .orElseThrow(() -> new BusinessException("Car is not exist."));
        if(car.getState()== CarState.RENTED || car.getState()==CarState.MAINTENANCE){
            throw new BusinessException("Car is not available for rent.");
        }
-     }
+     }*/
+
 
      public void checkIfCarCanBeUpdate(int id){
         Car car =this.carRepository.findById(id).orElseThrow(() -> new BusinessException("Car is not exists."));

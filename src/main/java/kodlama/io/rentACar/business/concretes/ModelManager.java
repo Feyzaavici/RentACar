@@ -2,14 +2,18 @@ package kodlama.io.rentACar.business.concretes;
 
 import kodlama.io.rentACar.business.abstructs.ModelService;
 import kodlama.io.rentACar.business.requests.CreateModelRequest;
+import kodlama.io.rentACar.business.responses.GetAllCarsResponse;
 import kodlama.io.rentACar.business.responses.GetAllModelsResponse;
 import kodlama.io.rentACar.core.utilies.mappers.ModelMapperService;
 import kodlama.io.rentACar.dataAccess.abstructs.ModelRepository;
+import kodlama.io.rentACar.entities.concretes.Car;
 import kodlama.io.rentACar.entities.concretes.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +34,7 @@ public class ModelManager implements ModelService {
         this.modelMapperService = modelMapperService;
     }
 
-
+/*
     @Override
     public List<GetAllModelsResponse> getAll() {
 
@@ -41,6 +45,15 @@ public class ModelManager implements ModelService {
         return modelsResponses;
 
     }
+*/
+
+    public Page<GetAllModelsResponse> getAll(Pageable pageable) {
+
+        Page<Model> models = modelRepository.findAll(pageable);
+
+        return models.map(model -> modelMapperService.forResponse().map(model, GetAllModelsResponse.class));
+    }
+
 
     @Override
     public void add(CreateModelRequest createModelRequest) {

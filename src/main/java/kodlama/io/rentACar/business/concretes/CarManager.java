@@ -17,6 +17,8 @@ import kodlama.io.rentACar.entities.concretes.Car;
 
 import kodlama.io.rentACar.entities.enums.CarState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +39,7 @@ public class CarManager implements CarService {
         this.modelMapperService=modelMapperService;
     }
 
-
+    /*
     @Override
     public List<GetAllCarsResponse> getAll() {
         List<Car> cars = carRepository.findAll();
@@ -46,6 +48,17 @@ public class CarManager implements CarService {
                 .collect(Collectors.toList());
         return carsResponse;
 
+    }
+
+*/
+
+    @Override
+    public Page<GetAllCarsResponse> getAll(Pageable pageable) {
+
+        Page<Car> cars = carRepository.findAll(pageable);
+
+        return cars.map(car -> modelMapperService.forResponse().map(car, GetAllCarsResponse.class)
+        );
     }
 
     @Override
@@ -88,4 +101,16 @@ public class CarManager implements CarService {
         Car car=carRepository.findById(id).orElseThrow(()-> new BusinessException("Car not found."));
         return car;
     }
+
+    public void markAsRented(Car car) {
+        car.setState(CarState.RENTED);
+        carRepository.save(car);
+    }
+
+    public void markAsAvailable(Car car) {
+        car.setState(CarState.AVAILABLE);
+        carRepository.save(car);
+    }
+
+
 }

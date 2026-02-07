@@ -9,6 +9,9 @@ import kodlama.io.rentACar.business.requests.UpdateCarRequest;
 import kodlama.io.rentACar.business.responses.GetAllCarsResponse;
 import kodlama.io.rentACar.business.responses.GetByIdCarResponse;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +26,24 @@ public class CarsControllers {
         this.carService=carService;
     }
 
+
+    /*
     @GetMapping()
     public List<GetAllCarsResponse> getAll(){
 
         return carService.getAll();
     }
+    */
+
+    @GetMapping("/paging")
+    public Page<GetAllCarsResponse> getAll(
+            @RequestParam int page,
+            @RequestParam int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return carService.getAll(pageable);
+    }
+
 
     @GetMapping("/{id}")
     public GetByIdCarResponse getByIdResponse(@PathVariable int id){

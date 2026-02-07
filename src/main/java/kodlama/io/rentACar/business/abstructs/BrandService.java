@@ -4,13 +4,15 @@ import kodlama.io.rentACar.business.requests.CreateBrandRequest;
 import kodlama.io.rentACar.business.requests.UpdateBrandRequest;
 import kodlama.io.rentACar.business.responses.GetAllBrandsResponse;
 import kodlama.io.rentACar.business.responses.GetByIdResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface BrandService {
 
-    List<GetAllBrandsResponse> getAll();
-
+   // List<GetAllBrandsResponse> getAll();
+   Page<GetAllBrandsResponse> getAll(Pageable pageable);
     GetByIdResponse getById(int id);
     void add(CreateBrandRequest createBrandRequest);
     void update(UpdateBrandRequest updateBrandRequest);

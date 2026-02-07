@@ -29,13 +29,13 @@ public class Car {
     private CarState state; //Available, Rented, Maintenance
 
     @Column(name="current_kilometer")
-    private Long currentKilometer;
+    private long currentKilometer;
 
     @ManyToOne
     @JoinColumn(name="model_id")
     private Model model;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "car")
     private List<Rental> rentals;
 
@@ -43,7 +43,7 @@ public class Car {
 
     }
 
-    public Car(int id, String plate, double dailyPrice, int modelYear, CarState state, Long currentKilometer){
+    public Car(int id, String plate, double dailyPrice, int modelYear, CarState state, long currentKilometer){
         this.id=id;
         this.plate=plate;
         this.dailyPrice=dailyPrice;
@@ -106,11 +106,15 @@ public class Car {
         return rentals;
     }
 
-    public Long getCurrentKilometer() {
+    public long getCurrentKilometer() {
         return currentKilometer;
     }
 
-    public void setCurrentKilometer(Long currentKilometer) {
+    public void setCurrentKilometer(long currentKilometer) {
         this.currentKilometer = currentKilometer;
+    }
+
+    public void setRentals(List<Rental> rentals) {
+        this.rentals = rentals;
     }
 }

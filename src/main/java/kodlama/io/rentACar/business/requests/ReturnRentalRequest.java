@@ -3,6 +3,7 @@ package kodlama.io.rentACar.business.requests;
 import java.time.LocalDate;
 
 public class ReturnRentalRequest {
+
     private int rentalId;
     private long endKilometer;
     private LocalDate returnDate;

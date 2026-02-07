@@ -13,6 +13,9 @@ public class Rental {
    @Column(name="id")
     private int id;
 
+   @Column(name="customer_id")
+   private int customerId;
+
    @Column(name="rent_date")
     private LocalDate rentDate;
    @Column(name="return_date")
@@ -33,13 +36,14 @@ public class Rental {
     public Rental() {
     }
 
-    public Rental(int id, Car car, LocalDate rentDate, LocalDate returnDate, long startKilometer, long endKilometer) {
+    public Rental(int id, Car car, LocalDate rentDate, LocalDate returnDate, long startKilometer, long endKilometer, int customerId) {
         this.id = id;
         this.car = car;
         this.rentDate = rentDate;
         this.returnDate = returnDate;
         this.startKilometer=startKilometer;
         this.endKilometer=endKilometer;
+        this.customerId=customerId;
     }
 
     public int getId() {
@@ -88,5 +92,13 @@ public class Rental {
 
     public void setEndKilometer(long endKilometer) {
         this.endKilometer = endKilometer;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 }

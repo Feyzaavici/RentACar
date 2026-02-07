@@ -2,7 +2,9 @@ package kodlama.io.rentACar.business.rules;
 
 import kodlama.io.rentACar.business.abstructs.CarService;
 import kodlama.io.rentACar.core.exceptions.BusinessException;
+import kodlama.io.rentACar.dataAccess.abstructs.RentalRepository;
 import kodlama.io.rentACar.entities.concretes.Car;
+import kodlama.io.rentACar.entities.concretes.Rental;
 import kodlama.io.rentACar.entities.enums.CarState;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,11 @@ import java.time.temporal.ChronoUnit;
 @Service
 public class RentalBusinessRules {
     CarService carService;
+    RentalRepository rentalRepository;
 
-    public RentalBusinessRules(CarService carService) {
+    public RentalBusinessRules(CarService carService, RentalRepository rentalRepository) {
         this.carService = carService;
+        this.rentalRepository=rentalRepository;
     }
 
 
@@ -40,11 +44,15 @@ public class RentalBusinessRules {
         }
     }
 
-    public void checkIfReturnDateBeforeRentDate( LocalDate rentDate,LocalDate returnDate){
-        if(returnDate.isBefore(rentDate)){
-            throw new BusinessException(" Return date cannot be before rent date.");
-        }
 
+    public void checkIfReturnDateBeforeRentDate(int rentalId, LocalDate returnDate) {
+
+        Rental rental = this.rentalRepository.findById(rentalId)
+                .orElseThrow(() -> new BusinessException("Rental not found"));
+
+        if (returnDate.isBefore(rental.getRentDate())) {
+            throw new BusinessException("Return date cannot be before rent date.");
+        }
     }
 
 
