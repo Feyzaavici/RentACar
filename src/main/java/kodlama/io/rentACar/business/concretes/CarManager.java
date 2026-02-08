@@ -21,9 +21,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 
 @Service
 public class CarManager implements CarService {
@@ -61,11 +58,21 @@ public class CarManager implements CarService {
         );
     }
 
+    public Page<GetAllCarsResponse> getAllByBrandId(int brandId, Pageable pageable) {
+
+        Page<Car> cars = carRepository.findByModel_Brand_Id(brandId, pageable);
+        return cars.map(car -> modelMapperService.forResponse().map(car, GetAllCarsResponse.class));
+
+
+    }
+
+
     @Override
     public GetByIdCarResponse getById(int id) {
         Car car = this.carRepository.findById(id).orElseThrow();
         GetByIdCarResponse response =this.modelMapperService.forResponse().map(car,GetByIdCarResponse.class);
         return response;
+
     }
 
     @Override

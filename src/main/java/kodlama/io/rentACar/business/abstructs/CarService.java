@@ -9,9 +9,6 @@ import kodlama.io.rentACar.entities.concretes.Car;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-
-import java.util.List;
-
 public interface CarService {
    // List<GetAllCarsResponse> getAll();
    Page<GetAllCarsResponse> getAll(Pageable pageable);
@@ -22,6 +19,6 @@ public interface CarService {
     Car getCarEntityById(int id);
     void markAsRented(Car car);
     void markAsAvailable(Car car);
-
+    Page<GetAllCarsResponse> getAllByBrandId(int brandId, Pageable pageable);
 
 }

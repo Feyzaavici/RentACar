@@ -9,13 +9,13 @@ import kodlama.io.rentACar.business.requests.UpdateCarRequest;
 import kodlama.io.rentACar.business.responses.GetAllCarsResponse;
 import kodlama.io.rentACar.business.responses.GetByIdCarResponse;
 
+import kodlama.io.rentACar.entities.concretes.Car;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/cars")
@@ -38,10 +38,24 @@ public class CarsControllers {
     @GetMapping("/paging")
     public Page<GetAllCarsResponse> getAll(
             @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam String field
+
+    ) {
+
+        Sort sort =Sort.by(field).ascending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return carService.getAll(pageable);
+    }
+
+    @GetMapping("/by-brand")
+    public Page<GetAllCarsResponse> getAllByBrandId(
+            @RequestParam int brandId,
+            @RequestParam int page,
             @RequestParam int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        return carService.getAll(pageable);
+        return carService.getAllByBrandId(brandId, pageable);
     }
 
 
