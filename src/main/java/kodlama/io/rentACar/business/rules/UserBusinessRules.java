@@ -2,7 +2,9 @@ package kodlama.io.rentACar.business.rules;
 
 import kodlama.io.rentACar.core.exceptions.BusinessException;
 import kodlama.io.rentACar.dataAccess.abstructs.UserRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserBusinessRules {
 
     UserRepository userRepository;

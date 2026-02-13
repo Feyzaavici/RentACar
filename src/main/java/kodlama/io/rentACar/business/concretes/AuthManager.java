@@ -3,6 +3,7 @@ package kodlama.io.rentACar.business.concretes;
 import kodlama.io.rentACar.business.abstructs.AuthService;
 import kodlama.io.rentACar.business.requests.CreateLoginRequest;
 import kodlama.io.rentACar.business.requests.CreateRegisterRequest;
+import kodlama.io.rentACar.business.responses.AuthResponse;
 import kodlama.io.rentACar.business.rules.UserBusinessRules;
 import kodlama.io.rentACar.core.exceptions.BusinessException;
 import kodlama.io.rentACar.dataAccess.abstructs.UserRepository;
@@ -34,7 +35,7 @@ public class AuthManager implements AuthService {
     }
 
     @Override
-    public void login(CreateLoginRequest createLoginRequest) {
+    public AuthResponse login(CreateLoginRequest createLoginRequest) {
         String email =createLoginRequest.getEmail();
         userBusinessRules.checkIfEmailNotExists(email);
         User user = userRepository.findByEmail(createLoginRequest.getEmail());
@@ -44,6 +45,8 @@ public class AuthManager implements AuthService {
         )){
             throw new BusinessException("Wrong password");
         }
+
+        return new AuthResponse("test-token");
 
     }
 }
