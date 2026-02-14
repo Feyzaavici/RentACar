@@ -6,6 +6,7 @@ import kodlama.io.rentACar.business.requests.CreateRegisterRequest;
 import kodlama.io.rentACar.business.responses.AuthResponse;
 import kodlama.io.rentACar.business.rules.UserBusinessRules;
 import kodlama.io.rentACar.core.exceptions.BusinessException;
+import kodlama.io.rentACar.core.security.jwt.JwtService;
 import kodlama.io.rentACar.dataAccess.abstructs.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import kodlama.io.rentACar.entities.concretes.User;
@@ -16,11 +17,14 @@ public class AuthManager implements AuthService {
     UserRepository userRepository;
     UserBusinessRules userBusinessRules;
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    JwtService jwtService;
 
-    public AuthManager( UserRepository userRepository, UserBusinessRules userBusinessRules, BCryptPasswordEncoder bCryptPasswordEncoder){
+    public AuthManager( UserRepository userRepository, UserBusinessRules userBusinessRules,
+                        BCryptPasswordEncoder bCryptPasswordEncoder, JwtService jwtService){
         this.userRepository=userRepository;
         this.userBusinessRules=userBusinessRules;
         this.bCryptPasswordEncoder=bCryptPasswordEncoder;
+        this.jwtService=jwtService;
     }
 
     @Override
@@ -46,7 +50,8 @@ public class AuthManager implements AuthService {
             throw new BusinessException("Wrong password");
         }
 
-        return new AuthResponse("test-token");
+        String token = jwtService.generateToken(user.getEmail());
+        return new AuthResponse(token);
 
     }
 }
