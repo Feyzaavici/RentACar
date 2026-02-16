@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import kodlama.io.rentACar.entities.concretes.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AuthManager implements AuthService {
     UserRepository userRepository;
@@ -50,7 +52,14 @@ public class AuthManager implements AuthService {
             throw new BusinessException("Wrong password");
         }
 
-        String token = jwtService.generateToken(user.getEmail());
+        List<String> roles = userRepository.findClaimsByUserId(user.getId());
+        System.out.println("User roles: " + roles);
+
+
+        //String token = jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user.getEmail(), roles);
+
+
         return new AuthResponse(token);
 
     }
