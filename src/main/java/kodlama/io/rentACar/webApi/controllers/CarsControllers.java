@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -64,12 +65,14 @@ public class CarsControllers {
         return carService.getById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping()
     @ResponseStatus(code= HttpStatus.CREATED)
     public void add(@Valid @RequestBody CreateCarRequest createCarRequest){
         this.carService.add(createCarRequest);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping
     public void update( @RequestBody UpdateCarRequest updateCarRequest){
         this.carService.update(updateCarRequest);

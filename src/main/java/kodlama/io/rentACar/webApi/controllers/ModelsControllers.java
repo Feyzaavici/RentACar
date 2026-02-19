@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class ModelsControllers {
         return modelService.getAll(pageable);
     }
 
+    @PreAuthorize("hashRole('ADMIN')")
     @PostMapping()
     @ResponseStatus(code= HttpStatus.CREATED)
     public void add( @Valid @RequestBody CreateModelRequest createModelRequest){

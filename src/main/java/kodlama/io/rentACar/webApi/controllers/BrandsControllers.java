@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -44,12 +45,14 @@ public class BrandsControllers {
     }
 
 
+    @PreAuthorize("hashRole('ADMIN')")
     @PostMapping()
     @ResponseStatus(code= HttpStatus.CREATED)
     public void add(@Valid @RequestBody CreateBrandRequest createBrandRequest){
         this.brandService.add(createBrandRequest);
     }
 
+    @PreAuthorize("hashRole ('ADMIN')")
     @PutMapping
     public void update( @RequestBody  UpdateBrandRequest updateBrandRequest){
         this.brandService.update(updateBrandRequest);

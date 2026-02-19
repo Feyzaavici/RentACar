@@ -1,5 +1,6 @@
 package kodlama.io.rentACar.core.security.jwt;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,6 +52,23 @@ public class JwtService {
                 .getSubject();
     }
 
+    public List<String> extractRoles(String token){
+
+        SecretKey key =Keys.hmacShaKeyFor(
+                secret.getBytes(StandardCharsets.UTF_8)
+        );
+
+        Claims claims = Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        return claims.get("roles", List.class);
+
+    }
+
 
 
 }
+
