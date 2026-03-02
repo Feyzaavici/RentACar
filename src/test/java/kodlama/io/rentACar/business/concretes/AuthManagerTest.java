@@ -1,10 +1,10 @@
-package kodlama.io.retACar.business.concretes;
+package kodlama.io.rentACar.business.concretes;
 
-import kodlama.io.rentACar.business.concretes.AuthManager;
 import kodlama.io.rentACar.business.requests.CreateLoginRequest;
 import kodlama.io.rentACar.business.requests.CreateRegisterRequest;
 import kodlama.io.rentACar.business.responses.AuthResponse;
 import kodlama.io.rentACar.business.rules.UserBusinessRules;
+import kodlama.io.rentACar.core.exceptions.BusinessException;
 import kodlama.io.rentACar.core.security.jwt.JwtService;
 import kodlama.io.rentACar.dataAccess.abstructs.UserRepository;
 import kodlama.io.rentACar.entities.concretes.User;
@@ -21,8 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -38,6 +37,7 @@ public class AuthManagerTest {
      private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Mock
     private JwtService jwtService;
+
 
     @InjectMocks
     private AuthManager authManager;
@@ -73,12 +73,29 @@ public class AuthManagerTest {
             verify(userRepository, times(1)).save(any(User.class));
         }
 
+        @Test
+        @DisplayName("Should throw exception when email is already taken")
+        void registerFailEmailAlreadyExists(){
+
+            doThrow(new BusinessException("Email already exists")).when(userBusinessRules)
+                    .checkIfEmailAlreadyExists("feyza@gmail.com");
+
+            assertThrows(BusinessException.class, () -> {
+                authManager.register(createRegisterRequest);
+            });
+
+            verify(bCryptPasswordEncoder, never()).encode(anyString());
+            verify(userRepository, never()).save(any(User.class));
+
+        }
 
     }
+
 
     @Nested
     @DisplayName("Create Login Tests")
     class CreateLoginTests{
+
 
         @BeforeEach
         void setUp(){
@@ -90,6 +107,7 @@ public class AuthManagerTest {
             user.setPassword("encoded_password");
 
         }
+
 
         @Test
         @DisplayName("Should return token when email exists and password is correct")
@@ -117,15 +135,9 @@ public class AuthManagerTest {
             verify(jwtService, times(1))
                     .generateToken(anyString(), anyList());
 
-
-
         }
 
-
     }
-
-
-
 
 
 }
