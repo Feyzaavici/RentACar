@@ -1,10 +1,10 @@
-🚗 Rent A Car Backend API
+# 🚗 Rent A Car Backend API
 
 A layered Spring Boot backend application for a Rent A Car system, implementing JWT-based authentication, role-based authorization, Docker containerization, and structured test strategies.
 
 This project was developed to practice clean architecture principles, backend security, database modeling, and testing strategies using modern Spring Boot technologies.
 
-🚀 Features
+## 🚀 Features
 
 Layered architecture (Controller – Service – Repository)
 
@@ -28,7 +28,7 @@ Swagger (OpenAPI 3) documentation
 
 ER Diagram for database modeling
 
-🏗️ Tech Stack
+## 🏗️ Tech Stack
 
 Java 21
 
@@ -52,7 +52,7 @@ MockMvc
 
 OpenAPI 3 (Swagger)
 
-🧱 Architecture
+## 🧱 Architecture
 
 The project follows a layered architecture pattern:
 
@@ -76,7 +76,7 @@ Database
 
 This structure ensures separation of concerns and maintainability.
 
-🗄️ Database Schema
+## 🗄️ Database Schema
 
 The relational database design of the system is shown below:
 
@@ -93,7 +93,7 @@ A Rental belongs to one User and one Car
 
 The database is normalized and designed using relational principles.
 
-🔐 Security Architecture
+## 🔐 Security Architecture
 
 Authentication flow:
 
@@ -123,7 +123,7 @@ Custom business rule validation
 
 Stateless authentication
 
-📘 API Documentation (Swagger UI)
+## 📘 API Documentation (Swagger UI)
 
 Interactive API documentation is available via OpenAPI 3.
 
@@ -133,7 +133,7 @@ http://localhost:8080/swagger-ui/index.html
 <p align="center"> <img src="docs/swagger-ui.png" width="900"/> </p>
 
 
-⚠️ Error Handling Example
+## ⚠️ Error Handling Example
 
 The application implements global exception handling to return meaningful error responses.
 
@@ -144,8 +144,8 @@ Example: Login attempt with a non-existing email
 </p>
 
 
-🧪 Testing Strategy
-✅ Unit Tests (Service Layer)
+## 🧪 Testing Strategy
+### ✅ Unit Tests (Service Layer)
 
 Dependencies mocked using Mockito
 
@@ -153,7 +153,7 @@ Success and failure scenarios tested
 
 Business rule validations verified
 
-✅ Web Layer Tests (Controller Layer)
+### ✅ Web Layer Tests (Controller Layer)
 
 Implemented using @WebMvcTest
 
@@ -171,30 +171,31 @@ Mock vs MockBean differences
 
 Isolated component testing
 
-🐳 Running with Docker
-1️⃣ Clone the repository
+## 🐳 Running with Docker
+### 1️⃣ Clone the repository
 git clone https://github.com/Feyzaavici/RentACar.git
-2️⃣ Start the containers
+### 2️⃣ Start the containers
 docker compose up -d
-3️⃣ Access the application
+### 3️⃣ Access the application
 http://localhost:8080
-💻 Running Locally (IDE Setup)
-1️⃣ Create PostgreSQL Database
 
+## 💻 Running Locally (IDE Setup)
+### 1️⃣ Create PostgreSQL Database
 Database name: 
 rentacar
-2️⃣ Configure application.properties
+### 2️⃣ Configure application.properties
+
 spring.datasource.url=jdbc:postgresql://localhost:5432/rentacar
 spring.datasource.username=postgres
 spring.datasource.password=your_password
 
 jwt.secret=your_secret_key
 jwt.expirationMinutes=60
-3️⃣ Run the Application
+### 3️⃣ Run the Application
 
 Start RentACarApplication from your IDE.
 
-📚 Key Concepts Practiced
+## 📚 Key Concepts Practiced
 
 Spring Security configuration
 
@@ -212,7 +213,7 @@ Relational database modeling
 
 Docker containerization
 
-🚀 Future Improvements
+## 🚀 Future Improvements
 
 Integration testing
 
@@ -227,7 +228,7 @@ API rate limiting
 Refresh token mechanism
 
 
-🎯 Project Goal
+## 🎯 Project Goal
 
 This project demonstrates practical backend development skills including:
 
@@ -243,7 +244,7 @@ Containerized deployment
 
 
 
-👩‍💻 Developer
+## 👩‍💻 Developer
 
 Feyza Avcı
 Computer Engineering Student
