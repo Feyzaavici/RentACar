@@ -244,7 +244,3 @@ Containerized deployment
 
 
 
-## 👩‍💻 Developer
-
-Feyza Avcı
-Computer Engineering Student
