@@ -20,9 +20,7 @@ Global exception handling
 
 Docker & Docker Compose support
 
-Unit Testing (Service layer)
-
-Web Layer Testing (Controller layer using MockMvc)
+Controller layer using MockMvc
 
 Swagger (OpenAPI 3) documentation
 
@@ -143,34 +141,6 @@ Example: Login attempt with a non-existing email
   <img src="docs/error-response.png" width="850"/>
 </p>
 
-
-## 🧪 Testing Strategy
-### ✅ Unit Tests (Service Layer)
-
-Dependencies mocked using Mockito
-
-Success and failure scenarios tested
-
-Business rule validations verified
-
-### ✅ Web Layer Tests (Controller Layer)
-
-Implemented using @WebMvcTest
-
-HTTP request/response validation with MockMvc
-
-Service layer mocked using @MockBean
-
-Security filters disabled in test environment
-
-The test structure demonstrates understanding of:
-
-Unit vs Web Layer testing
-
-Mock vs MockBean differences
-
-Isolated component testing
-
 ## 🐳 Running with Docker
 ### 1️⃣ Clone the repository
 git clone https://github.com/Feyzaavici/RentACar.git
@@ -205,8 +175,6 @@ Role-based authorization
 
 Clean layered architecture
 
-Unit testing with Mockito
-
 Controller testing with MockMvc
 
 Relational database modeling
@@ -237,8 +205,6 @@ Secure authentication & authorization
 Scalable layered architecture
 
 Database relationship modeling
-
-Test-driven thinking
 
 Containerized deployment
 
